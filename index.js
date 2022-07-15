@@ -15,13 +15,19 @@ client.on('ready', () => {
 });
 
 client.on('messageCreate', async message => {
-    if (message.author.bot) {
-        for (let embed of message.embeds) {
-            if (embed.description.includes("Ticket Closed by")) {
-                message.channel.send("$transcript");
+    try {
+        if (message.author.bot) {
+            for (let embed of message.embeds) {
+                if (embed.description) {
+                    if (embed.description.includes("Ticket Closed by")) {
+                        message.channel.send("$transcript");
+                    }
+                }
             }
-          }
-    } else return;
+        } else return;
+    } catch (error) {
+        console.log(error);
+    }
 })
 
 
